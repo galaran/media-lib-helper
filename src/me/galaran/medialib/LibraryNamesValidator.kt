@@ -22,13 +22,14 @@ enum class MediaType(val namePrefix: String, vararg val validExtensions: String)
     IMAGE("IMG", "jpg", "png"),
     PANORAMA("PAN", "jpg"),
     MAP("MAP", "jpg", "png"),
+    SCREENSHOT("SCR", "png"),
     VIDEO("VID", "mp4", "mov"),
     RECORD("REC", "opus")
 }
 
 var invalidNameCount = 0
 
-val validMediaCount = HashMap<MediaType, Int>()
+val validMediaCount = LinkedHashMap<MediaType, Int>(MediaType.values().associate { Pair(it, 0) })
 
 var totalFilesCount = 0
 var totalSize = 0L
@@ -59,7 +60,7 @@ fun main(args: Array<String>) {
     println("\nInvalid name count = $invalidNameCount")
 
     println("\nValid media files:")
-    validMediaCount.forEach { type, count -> println("$type: $count")}
+    validMediaCount.forEach { (type, count) -> println("$type: $count")}
 
     println("\nTotal files: $totalFilesCount | Size = ${totalSize / 1024 / 1024} MB")
 }
@@ -74,7 +75,7 @@ fun tryMatchMediaFile(file: File, pattern: Regex): Boolean {
         if (mediaClass.validExtensions.find { it == matchResult.groupValues[3] } == null) {
             handleInvalidName(file.toPath())
         } else {
-            validMediaCount.merge(mediaClass, 1, { prev, _ -> prev + 1 })
+            validMediaCount.computeIfPresent(mediaClass, { _, prev -> prev + 1 })
         }
     }
 

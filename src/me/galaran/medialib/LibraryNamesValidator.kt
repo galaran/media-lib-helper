@@ -7,16 +7,11 @@ import java.nio.file.Paths
 
 private val LIBRARY_ROOT = Paths.get("C:/YandexDisk/Photos")
 
-// Name patterns:
-// Month directories: yyyy_MM
-// Event directories: yyyy-MM-dd_<event_name>
-// Media file (date + time):   <type_prefix>_yyyyMMdd_hhmmss[_descr].<ext>
-// Media file (date + number): <type_prefix>_yyyyMMdd_N001[_descr].<ext>
-
-private val MONTH_DIR_REGEX = Regex("""\d{4}_\d{2}""")
-private val EVENT_DIR_REGEX = Regex("""\d{4}-\d{2}-\d{2}_(.+)""")
-private val MEDIA_FILE_DATE_TIME_REGEX = Regex("""(\w+?)_\d{8}_\d{6}(_.+?)?\.(\w+)""")
-private val MEDIA_FILE_DATE_NUM_REGEX = Regex("""(\w+?)_\d{8}_N\d{3}(_.+?)?\.(\w+)""")
+// Name patterns
+private val MONTH_DIR_REGEX = Regex("""\d{4}_\d{2}""") // yyyy_MM
+private val EVENT_DIR_REGEX = Regex("""\d{4}-\d{2}-\d{2}_(.+)""") // yyyy-MM-dd_<event_name>
+private val MEDIA_FILE_DATE_TIME_REGEX = Regex("""(\w+?)_\d{8}_\d{6}(_.+?)?\.(\w+)""") // <type_prefix>_yyyyMMdd_hhmmss[_descr].<ext>
+private val MEDIA_FILE_DATE_NUM_REGEX = Regex("""(\w+?)_\d{8}_N\d{3}(_.+?)?\.(\w+)""") // <type_prefix>_yyyyMMdd_N001[_descr].<ext>
 
 enum class MediaType(val namePrefix: String, vararg val validExtensions: String) {
     IMAGE("IMG", "jpg", "png"),

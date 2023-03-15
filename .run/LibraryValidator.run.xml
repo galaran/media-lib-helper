@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="LibraryValidator" type="JetRunConfigurationType">
+    <option name="MAIN_CLASS_NAME" value="me.galaran.medialib.LibraryValidatorKt" />
+    <module name="media-lib-helper" />
+    <option name="PROGRAM_PARAMETERS" value="D:\media" />
+    <shortenClasspath name="NONE" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
